@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+        <li>
+            <a href="/">Home</a>
+        </li>
+{% endblock sidenav %}
+
+{% block content%}
+<h1 align="center">User Register Page</h1>
+
+<form action="" enctype="multipart/form-data" method="post" novalidate>
+    <table>
+        {{form.as_table }}
+        <tr>
+            <td>
+                <input type="submit" value="Submit">
+            </td>
+        </tr>
+    </table>
+    {% csrf_token %}
+</form>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li>
+            <a href="{{ item.link }}">{{item.item}} </a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<table border="2" width="600">
+    <tr>
+        <th>
+            Message
+        </th>
+        <th>
+            From User
+        </th>
+        <th>
+            Date Sent
+        </th>
+    <tr>
+    {% for message in messages %}
+     <tr>
+        <td>
+            <p>
+                {{ message.message }}
+            </p>
+        </td>
+        <td>
+           <p>
+                {{ message.fromUser }}
+           </p>
+        </td>
+        <td>
+           <p>
+                {{ message.messagedate }}
+           </p>
+        </td>
+     </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

@@ -27,6 +27,6 @@ class Book(models.Model):
 
 class Message(models.Model):
     message = models.CharField(max_length=500)
-    toUser = models.CharField(max_length=20)
-    fromUser = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
-    messagedate = models.DateField(auto_now=True)
+    to_user = models.ForeignKey(User, blank=False, null=False, related_name="to_user_id", on_delete=models.CASCADE)
+    from_user = models.ForeignKey(User, blank=False, null=False, related_name="from_user_id", on_delete=models.CASCADE)
+    message_date = models.DateField(auto_now=True)

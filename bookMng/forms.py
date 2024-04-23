@@ -20,5 +20,5 @@ class MessageForm(ModelForm):
         model = Message
         fields = [
             'message',
-            'toUser',
+            'to_user',
         ]

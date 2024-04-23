@@ -21,6 +21,7 @@ def index(request):
                  {
                     'item_list': MainMenu.objects.all()
                  })
+
 @login_required(login_url=reverse_lazy('login'))
 def postbook(request):
    submitted = False
@@ -105,11 +106,11 @@ def book_delete(request, book_id):
 
 @login_required(login_url=reverse_lazy('login'))
 def inbox(request):
-    messages = Message.objects.filter(toUser=request.user)
+    messages = Message.objects.filter(to_user=request.user)
     return render(request,
                   'bookMng/inbox.html',
                   {
-                      'item_list': MainMenu.objects.all(),
+                     'item_list': MainMenu.objects.all(),
                      'messages': messages
                   })
 
@@ -119,10 +120,9 @@ def sendmessage(request):
    if request.method == 'POST':
        form = MessageForm(request.POST, request.FILES)
        if form.is_valid():
-           #form.save()
            message = form.save(commit=False)
            try:
-               message.username = request.user
+               message.from_user = request.user
            except Exception:
                pass
            message.save()

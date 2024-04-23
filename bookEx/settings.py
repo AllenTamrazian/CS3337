@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure--n2%!$#khay*j&ppuhkkujtv#k4g-dnrd!z+s&15vbwf1%nsu!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# These are just for docker testing, not real IPs
+ALLOWED_HOSTS = [ '.orb.local' ]
+CSRF_TRUSTED_ORIGINS = [ 'https://*.orb.local' ]
 
 
 # Application definition

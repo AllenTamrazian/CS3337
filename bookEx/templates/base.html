@@ -6,49 +6,80 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-            My Title
-        {% endblock title%}
+            My title
+        {% endblock title %}
     </title>
     <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+    <style>
+        body {
+            font-family: New Times Roman
+            margin: 10;
+            padding: 0;
+        }
+        #header {
+            background-color: #f2f2f2;
+            margin: 10;
+            padding: 0px;
+        }
+        #header img {
+            height: 20px;
+            margin-right: 10px;
+        }
+        #nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        #nav ul li {
+            display: inline;
+            margin-right: 50px;
+        }
+        #header span {
+            float: right;
+            line-height: 0px;
+        }
+        #main {
+            padding: 10px;
+        }
+
+    </style>
 </head>
 <body>
 <div id="wrapper">
-    <header id="header">
-        <img src="{% static 'logo.jpg' %}" height="50"/>
-        <span style ="float: right;">
-            {% if user.is_authenticated %}
-                {{ user.username }}
-                <form action="{% url 'logout' %}?next=/" method="post">
-                    <button type="submit">Logout</button>
-                    {% csrf_token %}
-            {% else %}
-                Not Logged in
-                <a href="{% url 'login' %}?next=/">Login</a>
-            {% endif %}
-                </form>
-        </span>
-        <img src="{% static 'banner.jpeg' %}" width="800" height="150"/>
-    </header>
-
-    <aside id="leftsidebar">
+    <div id="wrapper">
         <nav id="nav">
-            <ul>
-                {% block sidenav %}
-                <li>Menu 1</li>
-                <li>Menu 2</li>
-                {% endblock sidenav %}
-            </ul>
+                <ul>
+                    <img src="{% static 'logo.jpg' %}" alt="Logo" width="40" height="40"/>
+                 {% block sidenav %}
+                        <li>Menu 1</li>
+                        <li>Menu 2</li>
+                 {% endblock sidenav %}
+                    <span>
+                {% if user.is_authenticated %}
+                    {{ user.username}}
+                    <form action="{% url 'logout' %}?next=/" method="post">
+                        <button type="submit">logout</button>
+                        {% csrf_token %}
+                    </form>
+                {% else %}
+                    Not Logged in.
+                    <a href="{% url 'login' %}?next=/">Login</a>
+                {% endif %}
+                <img src="{% static 'Library.png' %}" width="800" height="400"/>
+            </span>
+             </ul>
         </nav>
-    </aside>
-    <section id="main">
-        {% block content%}
+    </header>
+    <main id="main">
+        {% block content %}
             <h1>This is our Book Exchange System</h1>
         {% endblock content %}
-    </section>
+    </main>
     <footer id="footer">
         2024 Spring CS3337 Section 1 Project
     </footer>
-
 </div>
 </body>
 </html>
+
+

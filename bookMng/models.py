@@ -30,3 +30,7 @@ class Message(models.Model):
     to_user = models.ForeignKey(User, blank=False, null=False, related_name="to_user_id", on_delete=models.CASCADE)
     from_user = models.ForeignKey(User, blank=False, null=False, related_name="from_user_id", on_delete=models.CASCADE)
     message_date = models.DateField(auto_now=True)
+
+
+class Search(models.Model):
+    request = models.CharField(max_length=200)

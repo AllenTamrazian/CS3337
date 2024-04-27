@@ -22,3 +22,11 @@ class MessageForm(ModelForm):
             'message',
             'to_user',
         ]
+
+class SearchForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = [
+            'message',
+            'to_user',
+        ]

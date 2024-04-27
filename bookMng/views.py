@@ -139,13 +139,10 @@ def sendmessage(request):
                     'submitted': submitted
                  })
 
-# added search page for now
 @login_required(login_url=reverse_lazy('login'))
-def search(request, book_id):
-   book = Book.objects.get(id=book_id)
+def search(request):
    return render(request,
-                 'bookMng/book_delete.html',
+                 'bookMng/search.html',
                  {
-                    'item_list': MainMenu.objects.all(),
-                     'book': book
+                    'item_list': MainMenu.objects.all()
                  })

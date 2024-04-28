@@ -39,11 +39,11 @@
              {% else %}
                 {% for comment in book.comments.all %}
                     <h3><strong>{{comment.commenter_name}}</strong></h3>
-                    <p>{{comment.body}}</p>
+                    <p>{{comment.commenter_body}}</p>
                     <p><small>{{comment.date_added}}</small></p>
                 {% endfor %}
              {% endif %}
-             <p><a class="btn btn-primary" href="{% url 'add-comment' pk=book.pk%}">Add Comment</a></p>
+             <p><a class="btn btn-primary" href="{% url 'add-comment' book.id %}">Add Comment</a></p>
          </td>
      </tr>
     {% endfor %}

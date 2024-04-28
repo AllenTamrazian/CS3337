@@ -35,7 +35,7 @@ class Message(models.Model):
 class Comment(models.Model):
     email = models.EmailField()
     commenter_name = models.CharField(max_length=200) #should be logged in to comment? or not?
-    body = models.TextField()
+    commenter_body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
 

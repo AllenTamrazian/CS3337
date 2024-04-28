@@ -143,21 +143,26 @@ def sendmessage(request):
                     'submitted': submitted
                  })
 
-# @login_required(login_url=reverse_lazy('login'))
-def add_comment(request, pk):
-    eachBook = Book.objects.get(id=pk)
+@login_required(login_url=reverse_lazy('login'))
+def add_comment(request, book_id):
+    eachBook = Book.objects.get(id=book_id)
     form = CommentForm(instance=eachBook)
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=eachBook)
-        name = request.user.username
-        body = form.cleaned_data['body'];
-        c = Comment(book=eachBook, commenter_name=name, body=body, date_added=datetime.now())
-        c.save()
-
-        return redirect('displaybooks')
+        if form.is_valid():
+            commenter_name = request.user.username
+            commenter_body = form.cleaned_data['commenter_body']
+            c = Comment(book=eachBook, commenter_name=commenter_name, commenter_body=commenter_body, date_added=datetime)
+            c.save()
+            return redirect('displaybooks')
+        else:
+            print('form is invalid')
+        # return redirect('displaybooks')
     else:
         form = CommentForm()
-    context = {
-        'form': form
-    }
-    return render(request, 'add_comment.html', context)
+    return render(request,
+                  'bookMng/add_comment.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'book': eachBook
+                  })

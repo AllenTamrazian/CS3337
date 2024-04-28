@@ -1,17 +1,43 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block sidenav %}
+    {% for item in item_list %}
+        <li>
+            <a href="{{ item.link }}">{{item.item}} </a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
 
+{% block content %}
 <h1 style="font-size:40px; margin-left:30px;"class="p-2">
     Add a Comment
 </h1>
 
+<!--<div class="container m-5">-->
+<!--    <form action="" method="post" >-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <input type="submit" name="Submit">-->
+<!--    </form>-->
+<!--</div>-->
+
 <div class="container m-5">
     <form action="" method="post" >
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" name="Submit">
+        <div class="form-group">
+            <label for="id_commenter_name">Commenter Name:</label>
+            <textarea id="id_commenter_name" name="commenter_name">
+                {{ form.commenter_name }}
+            </textarea>
+
+        </div>
+        <div class="form-group">
+            <label for="id_commenter_body">Comment Body:</label>
+            <textarea id="id_commenter_body" name="commenter_body">
+                {{ form.commenter_body }}
+            </textarea>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary">
     </form>
 </div>
-
 {% endblock %}

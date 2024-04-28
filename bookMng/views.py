@@ -1,13 +1,17 @@
+import datetime
+
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from .models import Message
 
 # Create your views here.
 from .models import MainMenu
+from .models import Comment
 from .forms import BookForm
 from .forms import MessageForm
+from .forms import CommentForm
 
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
@@ -138,3 +142,22 @@ def sendmessage(request):
                     'item_list': MainMenu.objects.all(),
                     'submitted': submitted
                  })
+
+# @login_required(login_url=reverse_lazy('login'))
+def add_comment(request, pk):
+    eachBook = Book.objects.get(id=pk)
+    form = CommentForm(instance=eachBook)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=eachBook)
+        name = request.user.username
+        body = form.cleaned_data['body'];
+        c = Comment(book=eachBook, commenter_name=name, body=body, date_added=datetime.now())
+        c.save()
+
+        return redirect('displaybooks')
+    else:
+        form = CommentForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'add_comment.html', context)

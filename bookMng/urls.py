@@ -10,6 +10,8 @@ urlpatterns = [
     path('displaybooks', views.displaybooks, name='displaybooks'),
     path('mybooks', views.mybooks, name='mybooks'),
     path('inbox',views.inbox, name="inbox"),
-    path('sendmessage',views.sendmessage, name="sendmessage")
+    path('sendmessage',views.sendmessage, name="sendmessage"),
+    path('displaybooks/<int:pk>/add-comment', views.add_comment, name='add-comment')
+
 ]
 

@@ -128,3 +128,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'bookEx/static')
 ]
+
+# delete this if u need to
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']

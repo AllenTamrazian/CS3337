@@ -2,42 +2,56 @@
 {% load static %}
 
 {% block sidenav %}
-    {% for item in item_list %}
-     <li>
-         <a href="{{ item.link }}"> {{ item.item }} </a>
-     </li>
-    {% endfor %}
+    <ul class="sidenav">
+        {% for item in item_list %}
+            <li>
+                <a href="{{ item.link }}">{{ item.item }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock sidenav %}
 
 {% block content %}
 <style>
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
     .btn {
         background-color: #4CAF50; /* Green */
         border: none;
         color: white;
-        padding: 5px 10px;
+        padding: 10px 20px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
-        margin: 4px 2px;
+        margin: 20px auto;
         transition-duration: 0.4s;
         cursor: pointer;
         border-radius: 8px;
+        display: block;
+    }
+
+    form {
+        text-align: center;
+    }
+
+    table {
+        margin: 0 auto;
     }
 </style>
 
-<h1 align="center">This is Post Book Page</h1>
+<h1>This is Post Book Page</h1>
 {% if submitted %}
-   <p>
-       Post Book Successfully!
-   </p>
+   <p>Post Book Successfully!</p>
 {% else %}
 <form action="" enctype="multipart/form-data" method="post" novalidate>
     <table>
         {{ form.as_table }}
         <tr>
-            <td>
+            <td colspan="2">
                 <input type="submit" value="Submit" class="btn">
             </td>
         </tr>

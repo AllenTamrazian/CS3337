@@ -2,51 +2,69 @@
 {% load static %}
 
 {% block sidenav %}
-    {% for item in item_list %}
-        <li>
-            <a href="{{ item.link }}">{{item.item}} </a>
-        </li>
-    {% endfor %}
+    <ul class="sidenav">
+        {% for item in item_list %}
+            <li>
+                <a href="{{ item.link }}">{{ item.item }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock sidenav %}
 
 {% block content %}
-<h1 align="center">Book Detail</h1>
-<table width="600">
-    <td align="center">
-        <img src="{% static book.pic_path %}" class="center" height="300"/>
-    </td>
-</table>
+<style>
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-<table border="2" width="600">
+    .book-detail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .book-image {
+        max-height: 300px;
+    }
+
+    table {
+        width: 600px;
+        border-collapse: collapse;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #92f2f2;
+    }
+</style>
+
+<h1>Book Detail</h1>
+
+<div class="book-detail">
+    <img src="{% static book.pic_path %}" alt="{{ book.name }}" class="book-image">
+</div>
+
+<table>
     <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Price
-        </th>
-
-        <th>
-            User
-        </th>
-        <th>
-            Publish Date
-        </th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>User</th>
+        <th>Publish Date</th>
     </tr>
-     <tr>
-        <td>
-            {{ book.name }}
-        </td>
-        <td>
-            {{ book.price }}
-        </td>
-
-        <td>
-            {{ book.username }}
-        </td>
-        <td>
-            {{ book.publishdate }}
-        </td>
-     </tr>
+    <tr>
+        <td>{{ book.name }}</td>
+        <td>{{ book.price }}</td>
+        <td>{{ book.username }}</td>
+        <td>{{ book.publishdate }}</td>
+    </tr>
 </table>
 {% endblock content %}

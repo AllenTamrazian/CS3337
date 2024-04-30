@@ -150,9 +150,9 @@ def add_comment(request, book_id):
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=eachBook)
         if form.is_valid():
-            commenter_name = request.user.username
+            user = request.user
             commenter_body = form.cleaned_data['commenter_body']
-            c = Comment(book=eachBook, commenter_name=commenter_name, commenter_body=commenter_body, date_added=datetime)
+            c = Comment(book=eachBook, user=user, commenter_body=commenter_body, date_added=datetime)
             c.save()
             return redirect('displaybooks')
         else:

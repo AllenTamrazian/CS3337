@@ -46,7 +46,7 @@
                 <p>No Comments Added Yet</p>
              {% else %}
                 {% for comment in book.comments.all %}
-                    <h3><strong>{{comment.commenter_name}}</strong></h3>
+                    <h3><strong>{{comment.user}}</strong></h3>
                     <p>{{comment.commenter_body}}</p>
                     <p><small>{{comment.date_added}}</small></p>
                 {% endfor %}

@@ -38,17 +38,16 @@ class Message(models.Model):
 
 
 class Comment(models.Model):
-    email = models.EmailField()
-    commenter_name = models.CharField(max_length=200) #should be logged in to comment? or not?
+    user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE)
     commenter_body = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='comments')
+    book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
         return f"Comment by {self.commenter_name} on {self.book.name}"
 
 class Rating(models.Model):
     value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # add message later, or foreign key to comment.
+    book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, blank=True, null=True, on_delete=models.SET_NULL)

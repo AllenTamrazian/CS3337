@@ -13,7 +13,7 @@
 <ul>
   {% for rating in rating_list %}
     <li>
-      {% rating.value %} from {% rating.user %}
+      {{ rating.value }} from {{ rating.user }}
     </li>
   {% endfor %}
 </ul>

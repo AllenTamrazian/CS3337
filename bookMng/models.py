@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -21,6 +22,10 @@ class Book(models.Model):
     pic_path = models.CharField(max_length=300, editable=False, blank=True)
     username = models.ForeignKey(User, blank=True, null=True, on_delete=models.CASCADE)
 
+    @property
+    def ratings_average(self):
+        return self.rating_set.all().aggregate(models.Avg('value'))['value__avg']
+
     def __str__(self):
         return str(self.id)
 
@@ -41,3 +46,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.commenter_name} on {self.book.name}"
+
+class Rating(models.Model):
+    value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # add message later, or foreign key to comment.

@@ -17,6 +17,9 @@
             Name
         </th>
         <th>
+            Rating
+        </th>
+        <th>
             Picture
         </th>
         <th>
@@ -29,6 +32,11 @@
             <a href="book_detail/{{ book.id }}">
                 {{ book.name }}
             </a>
+        </td>
+        <td>
+            {{ book.ratings_average }}
+
+            <a class="btn btn-primary" href="{% url 'expand-ratings' book.id %}">
         </td>
         <td>
             <img src="{% static book.pic_path %}" height="50"/>

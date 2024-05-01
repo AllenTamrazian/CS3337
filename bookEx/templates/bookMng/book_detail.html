@@ -59,12 +59,28 @@
         <th>Price</th>
         <th>User</th>
         <th>Publish Date</th>
+        <th>Rating</th>
     </tr>
     <tr>
         <td>{{ book.name }}</td>
         <td>{{ book.price }}</td>
         <td>{{ book.username }}</td>
         <td>{{ book.publishdate }}</td>
+        <td>{{ book.ratings_average }}</td>
     </tr>
 </table>
+{% if not book.comments.all %}
+<p>No Comments Added Yet</p>
+{% else %}
+{% for comment in book.comments.all %}
+<p>
+    <h4><strong>{{comment.user}}</strong></h4>
+    {{comment.commenter_body}}</br>
+    <small>{{comment.rating_value}} on {{comment.date_added}}</small>
+</p>
+<hr />
+{% endfor %}
+{% endif %}
+
+<a class="btn btn-primary" href="{% url 'add-comment' book.id %}">Add Comment or Rating</a>
 {% endblock content %}

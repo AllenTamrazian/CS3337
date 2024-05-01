@@ -14,68 +14,95 @@
 <!--     links added here -->
     <style>
         body {
-            font-family: New Times Roman
-            margin: 10;
+            font-family: New Times Roman;
+            margin: 0;
             padding: 0;
         }
         #header {
             background-color: #f2f2f2;
-            margin: 10;
-            padding: 0px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        #header img {
-            height: 20px;
-            margin-right: 10px;
+        #logo {
+            margin-right: 20px;
         }
         #nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
+            display: flex;
+            align-items: center;
         }
         #nav ul li {
-            display: inline;
-            margin-right: 50px;
+            margin-right: 20px;
         }
         #header span {
-            float: right;
             line-height: 0px;
         }
         #main {
             padding: 10px;
+        }
+        #library {
+            width: 750px;
+            max-width: 800px;
+            height: auto;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .button:hover {
+            background-color: #45a049;
         }
 
     </style>
 </head>
 <body>
 <div id="wrapper">
-    <div id="wrapper">
+    <header id="header">
+        <div id="logo">
+            <img src="{% static 'logo.jpg' %}" alt="Logo" width="40" height="40"/>
+        </div>
         <nav id="nav">
-                <ul>
-                    <img src="{% static 'logo.jpg' %}" alt="Logo" width="40" height="40"/>
-                 {% block sidenav %}
-                        <li>Menu 1</li>
-                        <li>Menu 2</li>
-                 {% endblock sidenav %}
-                    <span>
-                {% if user.is_authenticated %}
-                    {{ user.username}}
-                    <form action="{% url 'logout' %}?next=/" method="post">
-                        <button type="submit">logout</button>
-                        {% csrf_token %}
-                    </form>
-                {% else %}
-                    Not Logged in.
-                    <a href="{% url 'login' %}?next=/">Login</a>
-                {% endif %}
-                <img src="{% static 'Library.png' %}" width="800" height="400"/>
-            </span>
-             </ul>
+            <ul>
+                {% block sidenav %}
+                    <li><a class="sidenav-button" href="#">Menu 1</a></li>
+                    <li><a class="sidenav-button" href="#">Menu 2</a></li>
+                {% endblock sidenav %}
+            </ul>
         </nav>
+        <span>
+            {% if user.is_authenticated %}
+                {{ user.username}}
+                <form action="{% url 'logout' %}?next=/" method="post">
+                    <button class="button" type="submit">Logout</button>
+                    {% csrf_token %}
+                </form>
+            {% else %}
+                Not Logged in.
+                <a class="button" href="{% url 'login' %}?next=/">Login</a>
+            {% endif %}
+        </span>
     </header>
     <main id="main">
         {% block content %}
             <h1>This is our Book Exchange System</h1>
         {% endblock content %}
+        <img id="library" src="{% static 'Library.png' %}" alt="Library">
     </main>
     <footer id="footer">
         2024 Spring CS3337 Section 1 Project
@@ -83,5 +110,3 @@
 </div>
 </body>
 </html>
-
-

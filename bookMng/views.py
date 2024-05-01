@@ -1,13 +1,17 @@
+import datetime
+
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from .models import Message
 
 # Create your views here.
 from .models import MainMenu
+from .models import Comment
 from .forms import BookForm
 from .forms import MessageForm
+from .forms import CommentForm
 
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
@@ -167,3 +171,26 @@ def search(request):
                       'books': books
                    })
 
+@login_required(login_url=reverse_lazy('login'))
+def add_comment(request, book_id):
+    eachBook = Book.objects.get(id=book_id)
+    form = CommentForm(instance=eachBook)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=eachBook)
+        if form.is_valid():
+            commenter_name = request.user.username
+            commenter_body = form.cleaned_data['commenter_body']
+            c = Comment(book=eachBook, commenter_name=commenter_name, commenter_body=commenter_body, date_added=datetime)
+            c.save()
+            return redirect('displaybooks')
+        else:
+            print('form is invalid')
+        # return redirect('displaybooks')
+    else:
+        form = CommentForm()
+    return render(request,
+                  'bookMng/add_comment.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'book': eachBook
+                  })

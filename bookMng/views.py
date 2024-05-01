@@ -166,3 +166,4 @@ def search(request):
                       'item_list': MainMenu.objects.all(),
                       'books': books
                    })
+

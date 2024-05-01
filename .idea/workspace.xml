@@ -6,13 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f8b3f28c-7c11-4fac-b04c-fefd685b0a4f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookEx/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookEx/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookEx/templates/bookMng/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookEx/templates/bookMng/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookEx/templates/bookMng/sendmessage.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookEx/templates/bookMng/sendmessage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookMng/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookMng/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookMng/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookMng/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookMng/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookMng/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

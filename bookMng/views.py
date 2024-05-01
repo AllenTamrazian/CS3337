@@ -15,50 +15,53 @@ from django.urls import reverse_lazy
 
 from django.contrib.auth.decorators import login_required
 
+
 def index(request):
-   return render(request,
-                 'bookMng/index.html',
-                 {
-                    'item_list': MainMenu.objects.all()
-                 })
+    return render(request,
+                  'bookMng/index.html',
+                  {
+                      'item_list': MainMenu.objects.all()
+                  })
+
 
 @login_required(login_url=reverse_lazy('login'))
 def postbook(request):
-   submitted = False
-   if request.method == 'POST':
-       form = BookForm(request.POST, request.FILES)
-       if form.is_valid():
-           #form.save()
-           book = form.save(commit=False)
-           try:
-               book.username = request.user
-           except Exception:
-               pass
-           book.save()
-           return HttpResponseRedirect('/postbook?submitted=True')
-   else:
-       form = BookForm()
-       if 'submitted' in request.GET:
-           submitted=True
-   return render(request,
-                 'bookMng/postbook.html',
-                 {
-                    'form': form,
-                    'item_list': MainMenu.objects.all(),
-                    'submitted': submitted
-                 })
+    submitted = False
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.save()
+            book = form.save(commit=False)
+            try:
+                book.username = request.user
+            except Exception:
+                pass
+            book.save()
+            return HttpResponseRedirect('/postbook?submitted=True')
+    else:
+        form = BookForm()
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request,
+                  'bookMng/postbook.html',
+                  {
+                      'form': form,
+                      'item_list': MainMenu.objects.all(),
+                      'submitted': submitted
+                  })
+
 
 @login_required(login_url=reverse_lazy('login'))
 def displaybooks(request):
-   books = Book.objects.all()
-   for b in books:
-       b.pic_path = b.picture.url[14:]
-   return render(request,
-                 'bookMng/displaybooks.html',
-                 {
-                    'item_list': MainMenu.objects.all(),
-                     'books': books
-                 })
+    books = Book.objects.all()
+    for b in books:
+        b.pic_path = b.picture.url[14:]
+    return render(request,
+                  'bookMng/displaybooks.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'books': books
+                  })
 
 
 class Register(CreateView):
@@ -70,39 +73,43 @@ class Register(CreateView):
         form.save()
         return HttpResponseRedirect(self.success_url)
 
+
 @login_required(login_url=reverse_lazy('login'))
 def book_detail(request, book_id):
-   book = Book.objects.get(id=book_id)
-   book.pic_path = book.picture.url[14:]
-   return render(request,
-                 'bookMng/book_detail.html',
-                 {
-                    'item_list': MainMenu.objects.all(),
-                     'book': book
-                 })
+    book = Book.objects.get(id=book_id)
+    book.pic_path = book.picture.url[14:]
+    return render(request,
+                  'bookMng/book_detail.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'book': book
+                  })
+
 
 @login_required(login_url=reverse_lazy('login'))
 def mybooks(request):
-   books = Book.objects.filter(username=request.user)
-   for b in books:
-       b.pic_path = b.picture.url[14:]
-   return render(request,
-                 'bookMng/mybooks.html',
-                 {
-                    'item_list': MainMenu.objects.all(),
-                     'books': books
-                 })
+    books = Book.objects.filter(username=request.user)
+    for b in books:
+        b.pic_path = b.picture.url[14:]
+    return render(request,
+                  'bookMng/mybooks.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'books': books
+                  })
+
 
 @login_required(login_url=reverse_lazy('login'))
 def book_delete(request, book_id):
-   book = Book.objects.get(id=book_id)
-   book.delete()
-   return render(request,
-                 'bookMng/book_delete.html',
-                 {
-                    'item_list': MainMenu.objects.all(),
-                     'book': book
-                 })
+    book = Book.objects.get(id=book_id)
+    book.delete()
+    return render(request,
+                  'bookMng/book_delete.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'book': book
+                  })
+
 
 @login_required(login_url=reverse_lazy('login'))
 def inbox(request):
@@ -110,39 +117,52 @@ def inbox(request):
     return render(request,
                   'bookMng/inbox.html',
                   {
-                     'item_list': MainMenu.objects.all(),
-                     'messages': messages
+                      'item_list': MainMenu.objects.all(),
+                      'messages': messages
                   })
+
 
 @login_required(login_url=reverse_lazy('login'))
 def sendmessage(request):
-   submitted = False
-   if request.method == 'POST':
-       form = MessageForm(request.POST, request.FILES)
-       if form.is_valid():
-           message = form.save(commit=False)
-           try:
-               message.from_user = request.user
-           except Exception:
-               pass
-           message.save()
-           return HttpResponseRedirect('/sendmessage?submitted=True')
-   else:
-       form = MessageForm()
-       if 'submitted' in request.GET:
-           submitted=True
-   return render(request,
-                 'bookMng/sendmessage.html',
-                 {
-                    'form': form,
-                    'item_list': MainMenu.objects.all(),
-                    'submitted': submitted
-                 })
+    submitted = False
+    if request.method == 'POST':
+        form = MessageForm(request.POST, request.FILES)
+        if form.is_valid():
+            message = form.save(commit=False)
+            try:
+                message.from_user = request.user
+            except Exception:
+                pass
+            message.save()
+            return HttpResponseRedirect('/sendmessage?submitted=True')
+    else:
+        form = MessageForm()
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request,
+                  'bookMng/sendmessage.html',
+                  {
+                      'form': form,
+                      'item_list': MainMenu.objects.all(),
+                      'submitted': submitted
+                  })
 
-@login_required(login_url=reverse_lazy('login'))
+
 def search(request):
-   return render(request,
-                 'bookMng/search.html',
-                 {
-                    'item_list': MainMenu.objects.all()
-                 })
+    # if request.method == 'POST':
+    query = request.POST.get('q')
+    books = []
+
+    if query:
+        books = Book.objects.filter(name__icontains=query)
+    # for b in books:
+    #     b.pic_path = b.picture.url[14:]
+        # else:
+        #     books = Book.objects.none()
+
+    return render(request,
+                  'bookMng/search.html',
+                  {
+                      'item_list': MainMenu.objects.all(),
+                      'books': books
+                   })

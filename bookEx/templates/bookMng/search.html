@@ -9,5 +9,25 @@
     {% endfor %}
 {% endblock sidenav %}
 
-<!--{% block content %}-->
-<!--{% endblock content %}-->
+{% block content %}
+<h1>Search</h1>
+    <form action="{% url 'search'}" method="post">
+        <input type="text" name="q" placeholder="Search for books...">
+            <button type="submit">Search</button>
+    {% csrf_token %}
+    </form>
+
+    {% if books %}
+        <h2>Search Results for "{{ query }}"</h2>
+        <ul>
+            {% for book in books %}
+                <li><a href="{% url 'book_detail' book.id %}">{{ book.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        {% if query %}
+            <h2>Search Results for "{{ query }}"</h2>
+            <p>No books found matching "{{ query }}".</p>
+        {% endif %}
+    {% endif %}
+{% endblock content %}

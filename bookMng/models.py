@@ -24,7 +24,15 @@ class Book(models.Model):
 
     @property
     def ratings_average(self):
-        return self.rating_set.all().aggregate(models.Avg('value'))['value__avg']
+        average = self.ratings.all().aggregate(models.Avg('value'))['value__avg']
+        if average:
+            return f"{average:.2f}/5 from {self.ratings_count}"
+        else:
+            return "Unrated"
+
+    @property
+    def ratings_count(self):
+        return len(self.ratings.all())
 
     def __str__(self):
         return str(self.id)
@@ -43,11 +51,18 @@ class Comment(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name='comments')
 
+    @property
+    def rating_value(self): # can't name this just 'rating', because that's the related name
+        try:
+            return f"{self.rating.get().value:.2f}/5"
+        except Rating.DoesNotExist:
+            return "Not rated"
+
     def __str__(self):
         return f"Comment by {self.commenter_name} on {self.book.name}"
 
 class Rating(models.Model):
     value = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
-    book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, blank=False, null=False, on_delete=models.CASCADE, related_name='ratings')
     user = models.ForeignKey(User, blank=False, null=False, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, blank=True, null=True, on_delete=models.SET_NULL)
+    comment = models.ForeignKey(Comment, blank=True, null=True, on_delete=models.SET_NULL, related_name='rating')

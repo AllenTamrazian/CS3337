@@ -12,6 +12,7 @@ from .models import Comment
 from .forms import BookForm
 from .forms import MessageForm
 from .forms import CommentForm
+from .forms import RatingForm
 
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
@@ -146,18 +147,32 @@ def sendmessage(request):
 @login_required(login_url=reverse_lazy('login'))
 def add_comment(request, book_id):
     eachBook = Book.objects.get(id=book_id)
-    form = CommentForm(instance=eachBook)
+
     if request.method == 'POST':
         form = CommentForm(request.POST, instance=eachBook)
-        if form.is_valid():
-            user = request.user
-            commenter_body = form.cleaned_data['commenter_body']
-            c = Comment(book=eachBook, user=user, commenter_body=commenter_body, date_added=datetime)
-            c.save()
-            return redirect('displaybooks')
+        rating = RatingForm(request.POST)
+        r = None
+        c = None
+
+        if rating.is_valid():
+           r = rating.save(commit=False)
+           r.book = eachBook
+           r.user = request.user
         else:
-            print('form is invalid')
-        # return redirect('displaybooks')
+           print("no rating provided")
+
+        if form.is_valid():
+            commenter_body = form.cleaned_data['commenter_body']
+            c = Comment(book=eachBook, user=request.user, commenter_body=commenter_body, date_added=datetime)
+            if r:
+               r.comment = c
+        else:
+            print('no comment provided')
+
+        if c: c.save()
+        if r: r.save()
+
+        return redirect('displaybooks')
     else:
         form = CommentForm()
     return render(request,

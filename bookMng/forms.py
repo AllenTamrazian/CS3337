@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from .models import Book
 from .models import Message
 from .models import Comment
+from .models import Rating
 
 
 class BookForm(ModelForm):
@@ -33,3 +34,10 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'commenter_body': forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = [
+            'value'
+        ]

@@ -10,7 +10,7 @@
 
 {% block content %}
 <h1 style="font-size:40px; margin-left:30px;"class="p-2">
-    Add a Comment
+    Add a Comment or Rating
 </h1>
 
 <!--<div class="container m-5">-->
@@ -20,23 +20,38 @@
 <!--        <input type="submit" name="Submit">-->
 <!--    </form>-->
 <!--</div>-->
+<style>
+details[open] summary span.icon {
+  transform: rotate(180deg);
+}
 
+summary {
+  display: flex;
+  cursor: pointer;
+}
+</style>
 <div class="container m-5">
     <form action="" method="post" >
         {% csrf_token %}
-        <div class="form-group">
-            <label for="id_commenter_name">Commenter Name:</label>
-            <textarea id="id_commenter_name" name="commenter_name">
-                {{ form.commenter_name }}
-            </textarea>
-
-        </div>
-        <div class="form-group">
+        <details>
+            <summary>
+                Add Comment
+                <span class="icon">^</span>
+            </summary>
             <label for="id_commenter_body">Comment Body:</label>
             <textarea id="id_commenter_body" name="commenter_body">
                 {{ form.commenter_body }}
             </textarea>
-        </div>
+        </details>
+        <hr />
+        <details>
+            <summary>
+                Add Rating
+                <span class="icon">^</span>
+            </summary>
+            <label for="id_rating">Rating:</label>
+            <input id="id_rating" type="number" min="0" max="5" name="value">
+        </details>
         <input type="submit" value="Submit" class="btn btn-primary">
     </form>
 </div>

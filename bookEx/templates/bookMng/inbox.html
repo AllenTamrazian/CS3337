@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block sidenav %}
 <div class="sidenav">
@@ -13,63 +14,16 @@
     <style>
         .content {
             text-align: center;
-            padding: 20px;
+            padding: 10px;
         }
 
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 0 auto;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #3D5168; /* Updated color */
-            color: white;
-            font-weight: bold;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #f0f0f0;
-        }
-
-        p {
-            margin: 0;
+        h1 {
+            color: #3D5168;
+            font-size: 32px;
+            margin-bottom: 30px;
         }
     </style>
 
-    <table>
-        <tr>
-            <th>Message</th>
-            <th>From User</th>
-            <th>Date Sent</th>
-        </tr>
-        {% for message in messages %}
-        <tr>
-            <td>
-                <p>{{ message.message }}</p>
-            </td>
-            <td>
-                <p>{{ message.from_user }}</p>
-            </td>
-            <td>
-                <p>{{ message.message_date }}</p>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <h1>Welcome to our Book Exchange System</h1>
 </div>
 {% endblock content %}

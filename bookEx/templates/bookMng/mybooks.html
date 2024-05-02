@@ -2,84 +2,92 @@
 {% load static %}
 
 {% block sidenav %}
-    <ul class="sidenav">
-        {% for item in item_list %}
-            <li>
-                <a href="{{ item.link }}">{{ item.item }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+<div class="sidenav">
+    {% for item in item_list %}
+        <a href="{{ item.link }}">{{ item.item }}</a>
+    {% endfor %}
+</div>
 {% endblock sidenav %}
 
 {% block content %}
-<style>
-    h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+<div class="content">
+    <style>
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
 
-    table {
-        width: 700px;
-        border-collapse: collapse;
-    }
+        h1 {
+            color: #3D5168; /* Updated color */
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
 
-    th, td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-    th {
-        background-color: #92f2f2;
-    }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-    td {
-        vertical-align: middle;
-    }
+        th {
+            background-color: #3D5168; /* Updated color */
+            color: white;
+        }
 
-    .book-name {
-        color: #333;
-        font-weight: bold;
-        text-decoration: none;
-    }
+        td {
+            vertical-align: middle;
+        }
 
-    .book-name:hover {
-        color: #007bff;
-    }
+        .book-name {
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
-    .book-image {
-        max-width: 100px;
-        max-height: 100px;
-        display: block;
-        margin: 0 auto;
-    }
+        .book-name:hover {
+            color: #3D5168; /* Updated color */
+        }
 
-    .delete-btn {
-        color: #fff;
-        background-color: #dc3545;
-        border: none;
-        padding: 5px 15px;
-        border-radius: 4px;
-        text-decoration: none;
-        cursor: pointer;
-    }
+        .book-image {
+            max-width: 100px;
+            max-height: 100px;
+            display: block;
+            margin: 0 auto;
+        }
 
-    .delete-btn:hover {
-        background-color: #c82333;
-    }
-</style>
+        .delete-btn {
+            color: #fff;
+            background-color: #dc3545;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-<h1>My Books</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Picture</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for book in books %}
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+
+    <h1>My Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Picture</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
             <tr>
                 <td>
                     <a href="book_detail/{{ book.id }}" class="book-name">{{ book.name }}</a>
@@ -91,7 +99,9 @@
                     <a href="book_delete/{{ book.id }}" class="delete-btn">Delete</a>
                 </td>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}
+

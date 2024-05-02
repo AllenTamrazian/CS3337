@@ -1,29 +1,94 @@
 {% extends "base.html" %}
+
 {% block sidenav %}
+<div class="sidenav">
     {% for item in item_list %}
-        <li>
-            <a href="{{ item.link }}">{{item.item}} </a>
-        </li>
+        <a href="{{ item.link }}">{{item.item}}</a>
     {% endfor %}
+</div>
 {% endblock sidenav %}
 
-{% block content%}
-    <h1 align="center">Send a Message Page</h1>
-{% if submitted %}
-    <p>
+{% block content %}
+<div class="content">
+    <style>
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #3D5168; /* Changed color */
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3D5168; /* Changed color */
+            color: white;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="submit"] {
+            background-color: #3D5168; /* Changed color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #293749; /* Darker shade on hover */
+        }
+
+        .success-message {
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+
+    <h1>Send a Message Page</h1>
+
+    {% if submitted %}
+    <p class="success-message">
         Sent the message successfully!
     </p>
-{% else %}
-<form action="" enctype="multipart/form-data" method="post" novalidate>
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td>
-                <input type="submit" value="Submit">
-            </td>
-        </tr>
-    </table>
-    {% csrf_token %}
-</form>
-{% endif %}
+    {% else %}
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td>
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
+        </table>
+        {% csrf_token %}
+    </form>
+    {% endif %}
+</div>
 {% endblock content %}

@@ -1,44 +1,29 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block sidenav %}
+<div class="sidenav">
     {% for item in item_list %}
-        <li>
-            <a href="{{ item.link }}">{{item.item}} </a>
-        </li>
+        <a href="{{ item.link }}">{{item.item}}</a>
     {% endfor %}
+</div>
 {% endblock sidenav %}
 
 {% block content %}
-<table border="2" width="600">
-    <tr>
-        <th>
-            Message
-        </th>
-        <th>
-            From User
-        </th>
-        <th>
-            Date Sent
-        </th>
-    <tr>
-    {% for message in messages %}
-     <tr>
-        <td>
-            <p>
-                {{ message.message }}
-            </p>
-        </td>
-        <td>
-           <p>
-                {{ message.from_user }}
-           </p>
-        </td>
-        <td>
-           <p>
-                {{ message.message_date }}
-           </p>
-        </td>
-     </tr>
-    {% endfor %}
-</table>
+<div class="content">
+    <style>
+        .content {
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            color: #3D5168;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+    </style>
+
+    <h1>Welcome to our Book Exchange System</h1>
+</div>
 {% endblock content %}

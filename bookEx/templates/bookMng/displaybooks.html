@@ -2,41 +2,85 @@
 {% load static %}
 
 {% block sidenav %}
+<div class="sidenav">
     {% for item in item_list %}
-        <li>
-            <a href="{{ item.link }}">{{item.item}} </a>
-        </li>
+        <a href="{{ item.link }}">{{item.item}}</a>
     {% endfor %}
+</div>
 {% endblock sidenav %}
 
 {% block content %}
-<h1 align="center">Display Page</h1>
-<table border="2" width="600">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Picture
-        </th>
-        <th>
-            Rating
-        </th>
-    </tr>
-    {% for book in books %}
-     <tr>
-        <td>
-            <a href="book_detail/{{ book.id }}">
-                {{ book.name }}
-            </a>
-        </td>
-        <td>
-            <img src="{% static book.pic_path %}" height="50"/>
-        </td>
-        <td>
-            {{ book.ratings_average }}
-        </td>
-     </tr>
-    {% endfor %}
-</table>
+<div class="content">
+    <h1 class="page-title">Display Page</h1>
+    <style>
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .page-title {
+            color: #3D5168;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3D5168;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        img {
+            max-height: 50px;
+        }
+    </style>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Picture</th>
+            <th>Rating</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>
+                <a href="book_detail/{{ book.id }}" style="color: #3D5168; text-decoration: none;"> <!-- Updated color -->
+                    {{ book.name }}
+                </a>
+            </td>
+            <td>
+                <img src="{% static book.pic_path %}" alt="{{ book.name }}">
+            </td>
+            <td>
+                {{ book.ratings_average }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock content %}
+

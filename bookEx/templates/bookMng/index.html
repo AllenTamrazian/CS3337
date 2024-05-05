@@ -10,5 +10,90 @@
 {% endblock sidenav %}
 
 {% block content%}
-    <h1>Welcome to our Book Exchange System</h1>
+<!--    <pre style="text-align: center"><h1>Welcome to our Book Exchange System</h1></pre>-->
+<div class="container-fluid welcome-section">
+    <h1 style="text-align:center">Welcome to our Book Exchange System</h1>
+</div>
+
+<br>
+
+<h2 style="text-align:center">ABOUT US</h2>
+<style>
+    .container {
+        display: flex;
+    }
+    .left-column {
+        flex: 1;
+        margin-right: 20px;
+    }
+    .right-column {
+        flex: 2;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+        .paragraph-border {
+        border: 1px solid #dddddd;
+        padding: 10px;
+    }
+        .welcome-section {
+            background-color: lightblue;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 3px solid #000000;
+        }
+</style>
+
+<div class="container">
+    <div class="left-column">
+        <table>
+            <tr>
+                <th>Group Members</th>
+            </tr>
+            <tr>
+                <td>Allen Tamrazian</td>
+            </tr>
+            <tr>
+                <td>Gabriel Linecker </td>
+            </tr>
+            <tr>
+                <td>Kaelyn Taing</td>
+            </tr>
+            <tr>
+                <td>Barnabas Novak</td>
+            </tr>
+            <tr>
+                <td>Uriel Baldesco</td>
+            </tr>
+            <tr><td>Rizza Barnwell</td></tr>
+        </table>
+    </div>
+    <div class="right-column">
+        <p class="paragraph-border">
+            We created a Book Exchange System that gives book lovers and book readers
+            a place to post a book with a comment and/or a rating. The user is also
+            able to send and receive messages via the Inbox Tab. Give the Book System a
+            try and review your favorite books!
+        </p>
+        <p class="paragraph-border">We are a group of Computer Science Undergraduate students utilizing our
+        software engineering technical skills to create this system. We used our knowledge of Django, Bootstrap,
+            Databases, and Python to create a functional system for book users.
+        </p>
+    </div>
+</div>
+
 {% endblock content %}

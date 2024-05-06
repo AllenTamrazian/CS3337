@@ -26,7 +26,7 @@ class Book(models.Model):
     def ratings_average(self):
         average = self.ratings.all().aggregate(models.Avg('value'))['value__avg']
         if average:
-            return f"{average:.2f}/5 from {self.ratings_count}"
+            return f"{average:.2g}/5 from {self.ratings_count} ratings"
         else:
             return "Unrated"
 

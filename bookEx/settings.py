@@ -53,6 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "bookEx.urls"
+LOGIN_REDIRECT_URL='/'
 
 TEMPLATES = [
     {

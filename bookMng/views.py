@@ -154,22 +154,18 @@ def sendmessage(request):
 
 
 def search(request):
-    # if request.method == 'POST':
     query = request.POST.get('q')
     books = []
 
     if query:
         books = Book.objects.filter(name__icontains=query)
-    # for b in books:
-    #     b.pic_path = b.picture.url[14:]
-        # else:
-        #     books = Book.objects.none()
 
     return render(request,
                   'bookMng/search.html',
                   {
                       'item_list': MainMenu.objects.all(),
-                      'books': books
+                      'books': books,
+                      'query': query
                    })
 
 @login_required(login_url=reverse_lazy('login'))

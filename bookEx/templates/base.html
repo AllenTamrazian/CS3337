@@ -2,133 +2,64 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <head>
-
-    <style>
-        body {
-        text-align: center;
-            font-family: New Times Roman;
-            margin: 0;
-            padding: 0;
-        }
-        .topnav {
-            overflow: hidden;
-            background-color: #f2f2f2;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-        }
-        .topnav a {
-            color: #3D5168;
-            text-align: center;
-            text-decoration: none;
-            font-size: 17px;
-            margin-right: 15px;
-            margin-left: 15px;
-        }
-        .topnav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .topnav a.active {
-            background-color: #04AA6D;
-            color: white;
-        }
-        #header {
-            background-color: #f2f2f2;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        #logo {
-            margin-right: 0px;
-        }
-        #nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-        }
-        #nav ul li {
-            margin-right: 10px;
-        }
-        #header span {
-            line-height: 0px;
-        }
-        #main {
-            padding: 5px;
-        }
-        #library {
-            width: 750px;
-            max-width: 800px;
-            height: auto;
-            margin-top: 20px;
-        }
-        .button {
-            display: inline-block;
-            background-color: #3D5168;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 8px;
-        }
-        .button:hover {
-            background-color: #2C3E50;
-        }
-
-
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    {% block head %}
+    <title>Book Exchange System</title>
+    {% endblock head %}
 </head>
 <body>
-<div id="wrapper">
-    <header id="header">
-        <div id="logo">
-            <img src="{% static 'logo.jpg' %}" alt="Logo" width="40" height="40"/>
-        </div>
-        <nav id="nav">
-            <ul class="topnav">
-                {% block sidenav %}
-                    <li><a class="sidenav-button" href="#">Menu 1</a></li> <!-- Removed extra '<' character -->
-                {% endblock sidenav %}
-            </ul>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light">
+            <div class="container-fluid">
+                <div>
+                    <img src="{% static 'logo.jpg' %}" alt="Book Exchange" width="60" height="60"/>
+                </div>
+                <div class="collapse navbar-collapse container">
+                    <ul class="navbar-nav">
+                        {% block sidenav %}
+                        {% for item in item_list %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ item.link }}">{{item.item}}</a>
+                        </li>
+                        {% endfor %}
+                        {% endblock sidenav %}
+                    </ul>
+                </div>
+                <form class="ms-auto d-inline-flex" action="{% url 'search' %}" method="post">
+                    <input class="px-1" type="text" name="q" placeholder="Search for books...">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                    {% csrf_token %}
+                </form>
+                <span>
+                    {% if user.is_authenticated %}
+                    <form class="ms-auto text-nowrap px-3" action="{% url 'logout' %}?next=/" method="post">
+                        <span class="px-1">{{ user.username }}</span>
+                        <button class="btn btn-outline-danger" type="submit">Logout</button>
+                        {% csrf_token %}
+                    </form>
+                    {% else %}
+                    <form class="ms-auto text-nowrap px-3" action="{% url 'login' %}?next=/" method="get">
+                        <span class="px-1">Not Logged In</span>
+                        <button class="btn btn-outline-primary" type="submit">Login</button>
+                        {% csrf_token %}
+                    </form>
+                    {% endif %}
+                </span>
+            </div>
         </nav>
-        <span>
-            {% if user.is_authenticated %}
-                {{ user.username}}
-                <form action="{% url 'logout' %}?next=/" method="post">
-                    <button class="button" type="submit">Logout</button>
-                    {% csrf_token %}
-                </form>
-            {% else %}
-                <form action="{% url 'login' %}?next=/" method="get">
-                    Not Logged in.
-                    <button class="button" type="submit">Login</button>
-                    {% csrf_token %}
-                </form>
-            {% endif %}
-        </span>
     </header>
-    <main id="main">
-        {% block content %}
+    <main class="p-10">
+        <div class="container-fluid">
+            {% block content %}
             <h1>This is our Book Exchange System</h1>
-        {% endblock content %}
-        <img id="library" src="{% static 'Library.png' %}" alt="Library">
+            {% endblock content %}
+        </div>
+        <img id="separator-image" src="{% static 'Library.png' %}" alt="Library">
     </main>
-    <footer id="footer">
+    <footer>
         2024 Spring CS3337 Section 1 Project
     </footer>
-</div>
 </body>
 </html>

@@ -1,65 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block sidenav %}
-<div class="sidenav">
-    {% for item in item_list %}
-        <a href="{{ item.link }}">{{ item.item }}</a>
-    {% endfor %}
-</div>
-{% endblock sidenav %}
-
 {% block content %}
 <div class="content">
-    <style>
-        .content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #3D5168;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background-color: #3D5168;
-            border: none;
-            color: white;
-            padding: 5px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 20px auto;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 8px;
-            display: block;
-        }
-
-        table {
-            width: 50%;
-            border-collapse: collapse;
-            margin: 20px auto;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #e9e9e9;
-        }
-    </style>
-
     <h1>This is Post Book Page</h1>
     {% if submitted %}
        <p>Post Book Successfully!</p>

@@ -1,16 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block sidenav %}
-    {% for item in item_list %}
-        <li>
-            <a href="{{ item.link }}">{{item.item}} </a>
-        </li>
-    {% endfor %}
-{% endblock sidenav %}
-
 {% block content%}
-<!--    <pre style="text-align: center"><h1>Welcome to our Book Exchange System</h1></pre>-->
 <div class="container-fluid welcome-section">
     <h1 style="text-align:center">Welcome to our Book Exchange System</h1>
 </div>
@@ -18,45 +9,6 @@
 <br>
 
 <h2 style="text-align:center">ABOUT US</h2>
-<style>
-    .container {
-        display: flex;
-    }
-    .left-column {
-        flex: 1;
-        margin-right: 20px;
-    }
-    .right-column {
-        flex: 2;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-        .paragraph-border {
-        border: 1px solid #dddddd;
-        padding: 10px;
-    }
-        .welcome-section {
-            background-color: lightblue;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 3px solid #000000;
-        }
-</style>
 
 <div class="container">
     <div class="left-column">

@@ -1,15 +1,5 @@
 {% extends 'base.html' %}
 
-{% block sidenav %}
-    <ul>
-        {% for item in item_list %}
-            <li>
-                <a href="{{ item.link }}">{{ item.item }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock sidenav %}
-
 {% block content %}
     <div class="container">
         <h1 class="heading">Add a Comment or Rating</h1>
@@ -41,37 +31,3 @@
         </div>
     </div>
 {% endblock %}
-
-<style>
-    .container {
-        text-align: center;
-        margin-top: 50px;
-    }
-
-    .heading {
-        font-size: 40px;
-        margin-bottom: 30px;
-    }
-
-    .form-container {
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    .form-details {
-        margin-bottom: 20px;
-    }
-
-    .form-summary {
-        cursor: pointer;
-    }
-
-    .form-field {
-        margin-top: 10px;
-    }
-
-    .divider {
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
-</style>

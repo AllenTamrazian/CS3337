@@ -1,49 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block sidenav %}
-<div class="sidenav">
-    {% for item in item_list %}
-        <a href="{{ item.link }}">{{item.item}}</a>
-    {% endfor %}
-</div>
-{% endblock sidenav %}
-
 {% block content %}
-
 <div class="content">
-    <style>
-        .content {
-            text-align: center;
-            padding: 10px;
-        }
-        h1 {
-            color: #3D5168;
-            font-size: 32px;
-            margin-bottom: 30px;
-        }
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3D5168;
-            color: white;
-        }
-
-        td {
-            vertical-align: middle;
-        }
-    </style>
     <h1>Welcome to your Inbox</h1>
     <table border="2" width="600">
     <tr>
@@ -60,19 +19,13 @@
     {% for message in messages %}
      <tr>
         <td>
-            <p>
-                {{ message.message }}
-            </p>
+            {{ message.message }}
         </td>
         <td>
-           <p>
-                {{ message.from_user }}
-           </p>
+            {{ message.from_user }}
         </td>
         <td>
-           <p>
-                {{ message.message_date }}
-           </p>
+            {{ message.message_date }}
         </td>
      </tr>
     {% endfor %}

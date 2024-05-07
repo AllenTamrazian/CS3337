@@ -104,6 +104,11 @@
                 {% endblock sidenav %}
             </ul>
         </nav>
+        <form class="ms-auto d-inline-flex" action="{% url 'search' %}" method="post">
+                    <input class="px-1" type="text" name="q" placeholder="Search for books...">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                    {% csrf_token %}
+                </form>
         <span>
             {% if user.is_authenticated %}
                 {{ user.username}}

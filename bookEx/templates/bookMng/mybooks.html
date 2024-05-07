@@ -2,31 +2,18 @@
 {% load static %}
 
 {% block content %}
-<div class="content">
-    <h1>My Books</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Picture</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-            <tr>
-                <td>
-                    <a href="book_detail/{{ book.id }}" class="book-name">{{ book.name }}</a>
-                </td>
-                <td>
-                    <img src="{% static book.pic_path %}" alt="{{ book.name }}" class="book-image">
-                </td>
-                <td>
-                    <a href="book_delete/{{ book.id }}" class="delete-btn">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h1 class="page-title">My Books</h1>
+<div class="row row-cols-1 row-cols-md-3 g-3">
+    {% for book in books %}
+    <div class="col">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="{% static book.pic_path %}" alt="{{ book.name }}"/>
+            <div class="card-body">
+                <h5 class="card-title"><a href="book_detail/{{ book.id }}">{{ book.name }}</a></h5>
+                <a href="book_delete/{{ book.id }}" class="btn btn-outline-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock content %}

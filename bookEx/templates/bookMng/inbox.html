@@ -6,27 +6,15 @@
     <h1>Welcome to your Inbox</h1>
     <table border="2" width="600">
     <tr>
-        <th>
-            Message
-        </th>
-        <th>
-            From User
-        </th>
-        <th>
-            Date Sent
-        </th>
+        <th>Message</th>
+        <th>From User</th>
+        <th>Date Sent</th>
     <tr>
     {% for message in messages %}
      <tr>
-        <td>
-            {{ message.message }}
-        </td>
-        <td>
-            {{ message.from_user }}
-        </td>
-        <td>
-            {{ message.message_date }}
-        </td>
+        <td>{{ message.message }}</td>
+        <td>{{ message.from_user }}</td>
+        <td>{{ message.message_date }}</td>
      </tr>
     {% endfor %}
 	</table>

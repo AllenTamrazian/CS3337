@@ -13,11 +13,14 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-light">
             <div class="container-fluid">
-                <div>
-                    <img src="{% static 'logo.jpg' %}" alt="Book Exchange" width="60" height="60"/>
-                </div>
                 <div class="collapse navbar-collapse container">
                     <ul class="navbar-nav">
+                        <li>
+                            <a class="navbar-brand" href="/">
+                                <img src="{% static 'logo.png' %}" alt="Home" width="45" height="45" />
+                                Book Exchange
+                            </a>
+                        </li>
                         {% block sidenav %}
                         {% for item in item_list %}
                         <li class="nav-item">
@@ -54,9 +57,9 @@
         {% block content %}
         <h1>This is our Book Exchange System</h1>
         {% endblock content %}
-        <img class="img-fluid" src="{% static 'Library.png' %}" alt="Library">
+        <img class="img-fluid p-2 w-100" src="{% static 'shelf.png' %}" alt="Banner">
     </main>
-    <footer class="text-center">
+    <footer class="text-center text-muted">
         2024 Spring CS3337 Section 1 Project
     </footer>
 </body>

@@ -2,50 +2,70 @@
 {% load static %}
 
 {% block content%}
-<div class="container-fluid welcome-section">
-    <h1 style="text-align:center">Welcome to our Book Exchange System</h1>
+<div class="container-fluid">
+    <h1 class="bg-info bg-gradient p-1 border border-2 border-dark">Welcome to our Book Exchange System</h1>
 </div>
 
-<br>
+<br />
 
-<h2 style="text-align:center">ABOUT US</h2>
-
+<h2>ABOUT US</h2>
 <div class="container">
-    <div class="left-column">
-        <table>
-            <tr>
-                <th>Group Members</th>
-            </tr>
-            <tr>
-                <td>Allen Tamrazian</td>
-            </tr>
-            <tr>
-                <td>Gabriel Linecker </td>
-            </tr>
-            <tr>
-                <td>Kaelyn Taing</td>
-            </tr>
-            <tr>
-                <td>Barnabas Novak</td>
-            </tr>
-            <tr>
-                <td>Uriel Baldesco</td>
-            </tr>
-            <tr><td>Rizza Barnwell</td></tr>
+  <div class="row">
+    <div class="col-3">
+        <table class="table table-bordered text-start">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Group Members</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Allen Tamrazian</td>
+                </tr>
+                <tr>
+                    <td>Gabriel Linecker </td>
+                </tr>
+                <tr>
+                    <td>Kaelyn Taing</td>
+                </tr>
+                <tr>
+                    <td>Barnabas Novak</td>
+                </tr>
+                <tr>
+                    <td>Uriel Baldesco</td>
+                </tr>
+                <tr>
+                    <td>Rizza Barnwell</td>
+                </tr>
+            </tbody>
         </table>
     </div>
-    <div class="right-column">
-        <p class="paragraph-border">
-            We created a Book Exchange System that gives book lovers and book readers
-            a place to post a book with a comment and/or a rating. The user is also
-            able to send and receive messages via the Inbox Tab. Give the Book System a
-            try and review your favorite books!
-        </p>
-        <p class="paragraph-border">We are a group of Computer Science Undergraduate students utilizing our
-        software engineering technical skills to create this system. We used our knowledge of Django, Bootstrap,
+    <div class="col-8">
+        <p class="text-start fs-6">
+            We are a group of Computer Science Undergraduate students utilizing our
+            software engineering technical skills to create this system. We used our knowledge of Django, Bootstrap,
             Databases, and Python to create a functional system for book users.
+            We're passionate about the power of storytelling and
+            the joy of sharing books. We believe that every book deserves to be read
+            and cherished, and that's why we've created a platform where book lovers
+            from around the world can come together to exchange, discover, and connect.
+            <br /><br />
+            Our mission is simple: to make it easy and fun for people to find new homes
+            for their beloved books and discover hidden literary treasures. Whether you're
+            looking to declutter your bookshelf, find your next favorite read, or simply
+            connect with fellow book enthusiasts. Here, you can actively engage with the community by
+            commenting on and rating books. Additionally, our messaging feature enables seamless communication,
+            allowing you to connect with other members directly through the inbox.
         </p>
+        <figure class="text-end">
+            <blockquote class="blockquote">
+                <p>"There is no Frigate like a Book To take us Lands away."</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                <cite title="Emily Dickinson">Emily Dickinson</cite>
+            </figcaption>
+        </figure>
     </div>
+  </div>
 </div>
-
 {% endblock content %}

@@ -1,106 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block sidenav %}
-<div class="sidenav">
-    {% for item in item_list %}
-        <a href="{{ item.link }}">{{ item.item }}</a>
-    {% endfor %}
-</div>
-{% endblock sidenav %}
-
 {% block content %}
-<div class="content">
-    <style>
-        .content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #3D5168;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 80%;
-            border-collapse: collapse;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        th, td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3D5168;
-            color: white;
-        }
-
-        td {
-            vertical-align: middle;
-        }
-
-        .book-name {
-            color: #333;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .book-name:hover {
-            color: #3D5168;
-        }
-
-        .book-image {
-            max-width: 100px;
-            max-height: 100px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        .delete-btn {
-            color: #fff;
-            background-color: #dc3545;
-            border: none;
-            padding: 5px 15px;
-            border-radius: 4px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .delete-btn:hover {
-            background-color: #c82333;
-        }
-    </style>
-
-    <h1>My Books</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Picture</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
-            <tr>
-                <td>
-                    <a href="book_detail/{{ book.id }}" class="book-name">{{ book.name }}</a>
-                </td>
-                <td>
-                    <img src="{% static book.pic_path %}" alt="{{ book.name }}" class="book-image">
-                </td>
-                <td>
-                    <a href="book_delete/{{ book.id }}" class="delete-btn">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h2 class="page-title">My Book Uploads</h1>
+<div class="row row-cols-1 row-cols-md-5 g-3">
+    {% for book in books %}
+    <div class="col">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="{% static book.pic_path %}" alt="{{ book.name }}"/>
+            <div class="card-body">
+                <h5 class="card-title"><a href="book_detail/{{ book.id }}">{{ book.name }}</a></h5>
+                <a href="book_delete/{{ book.id }}" class="btn btn-outline-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock content %}

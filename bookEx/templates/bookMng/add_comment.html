@@ -1,77 +1,38 @@
 {% extends 'base.html' %}
-
-{% block sidenav %}
-    <ul>
-        {% for item in item_list %}
-            <li>
-                <a href="{{ item.link }}">{{ item.item }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock sidenav %}
+{% load widget_tweaks %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="heading">Add a Comment or Rating</h1>
+<h2 class="heading">Add a Comment or Rating</h2>
 
-        <div class="form-container">
+<div class="container p-2 text-start">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
             <form action="" method="post">
                 {% csrf_token %}
-                <details class="form-details">
-                    <summary class="form-summary">
+                <details>
+                    <summary class="fs-5">
                         Add Comment
                     </summary>
-                    <div class="form-field">
-                        <label for="id_commenter_body">Comment Body:</label>
-                        <textarea id="id_commenter_body" name="commenter_body">{{ form.commenter_body }}</textarea>
+                    <div class="form-group p-1">
+                        <label for="id_commenter_body" class="form-label">Comment Body</label>
+                        <textarea id="id_commenter_body" name="commenter_body" class="form-control">{{ form.commenter_body }}</textarea>
                     </div>
                 </details>
                 <hr class="divider">
-                <details class="form-details">
-                    <summary class="form-summary">
+                <details>
+                    <summary class="fs-5">
                         Add Rating
                     </summary>
-                    <div class="form-field">
-                        <label for="id_rating">Rating:</label>
-                        <input id="id_rating" type="number" min="0" max="5" name="value">
+                    <div class="form-group p-1">
+                        <label for="id_rating" class="form-label">Rating</label>
+                        <input id="id_rating" type="number" min="0" max="5" name="value" class="form-control">
                     </div>
                 </details>
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <div class="text-center">
+                    <input class="btn btn-outline-primary p-1" type="submit" value="Submit">
+                </div>
             </form>
         </div>
     </div>
+</div>
 {% endblock %}
-
-<style>
-    .container {
-        text-align: center;
-        margin-top: 50px;
-    }
-
-    .heading {
-        font-size: 40px;
-        margin-bottom: 30px;
-    }
-
-    .form-container {
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    .form-details {
-        margin-bottom: 20px;
-    }
-
-    .form-summary {
-        cursor: pointer;
-    }
-
-    .form-field {
-        margin-top: 10px;
-    }
-
-    .divider {
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
-</style>

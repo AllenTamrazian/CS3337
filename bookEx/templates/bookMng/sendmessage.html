@@ -1,94 +1,30 @@
 {% extends "base.html" %}
-
-{% block sidenav %}
-<div class="sidenav">
-    {% for item in item_list %}
-        <a href="{{ item.link }}">{{item.item}}</a>
-    {% endfor %}
-</div>
-{% endblock sidenav %}
+{% load widget_tweaks %}
 
 {% block content %}
-<div class="content">
-    <style>
-        .content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #3D5168;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-
-        table {
-            width: 100%;
-            margin: auto;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3D5168;
-            color: white;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="submit"] {
-            background-color: #3D5168;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #293749;
-        }
-
-        .success-message {
-            color: #28a745;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
-
-    <h1>Send a Message Page</h1>
-
-    {% if submitted %}
-    <p class="success-message">
-        Sent the message successfully!
-    </p>
-    {% else %}
-    <form action="" enctype="multipart/form-data" method="post" novalidate>
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>
-                    <input type="submit" value="Submit">
-                </td>
-            </tr>
-        </table>
-        {% csrf_token %}
-    </form>
-    {% endif %}
+<h2>Send a Message To...</h2>
+{% if submitted %}
+Sent the message successfully!
+{% else %}
+<div class="container p-2 text-start">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form class="" action="" enctype="multipart/form-data" method="post" novalidate>
+                <div class="form-group p-1">
+                    <label for="id_message" class="form-label">Message</label>
+                    {% render_field form.message class+='form-control' %}
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_to_user" class="form-label">To User</label>
+                    {% render_field form.to_user class+='form-control' %}
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-outline-primary p-1" type="submit" value="Submit">
+                </div>
+                {% csrf_token %}
+            </form>
+        </div>
+    </div>
 </div>
+{% endif %}
 {% endblock content %}

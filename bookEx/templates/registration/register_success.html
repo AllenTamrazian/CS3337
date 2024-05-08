@@ -2,14 +2,9 @@
 {% load static %}
 
 {% block sidenav %}
-        <li>
-            <a href="/">Home</a>
-        </li>
 {% endblock sidenav %}
 
 {% block content%}
-    <h1>User Registration Success!</h1>
-    <p>
-        Login: <a href="{% url 'login' %}?next=/"> Click Here</a>
-    </p>
+<h2>User Registration Complete!</h2>
+<p>Login: <a href="{% url 'login' %}?next=/"> Click Here</a></p>
 {% endblock content %}

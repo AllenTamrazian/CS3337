@@ -1,33 +1,27 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block sidenav %}
-    {% for item in item_list %}
-        <li>
-            <a href="{{ item.link }}">{{item.item}} </a>
-        </li>
-    {% endfor %}
-{% endblock sidenav %}
-
 {% block content %}
-<h1>Search</h1>
-    <form action="{% url 'search' %}" method="post">
-        <input type="text" name="q" placeholder="Search for books...">
-            <button type="submit">Search</button>
-    {% csrf_token %}
-    </form>
-
-    {% if books %}
-        <h2>Search Results for "{{ query }}"</h2>
-        <ul>
-            {% for book in books %}
-                <li><a href="book_detail/{{ book.id }}">{{ book.name }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        {% if query %}
-            <h2>Search Results for "{{ query }}"</h2>
-            <p>No books found matching "{{ query }}".</p>
-        {% endif %}
-    {% endif %}
+{% if books %}
+<h2 class="page-title">Search Results for {{ query }}</h2>
+<div class="row row-cols-1 row-cols-md-5 g-3">
+    {% for book in books %}
+    <div class="col">
+        <div class="card">
+            <img class="card-img-top img-fluid" src="{% static book.pic_path %}" alt="{{ book.name }}"/>
+            <div class="card-body">
+                <h5 class="card-title"><a href="book_detail/{{ book.id }}">{{ book.name }}</a></h5>
+                <!--<p class="card-text">{{ book.description }}</p>-->
+                <p class="card-footer"><small class="text-muted">{{ book.ratings_average }}</small></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+{% if query %}
+<h2 class="page-title">Search Results for "{{ query }}"</h2>
+<p>No books found matching "{{ query }}".</p>
+{% endif %}
+{% endif %}
 {% endblock content %}

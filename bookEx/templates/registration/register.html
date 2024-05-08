@@ -1,24 +1,50 @@
 {% extends "base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block sidenav %}
-        <li>
-            <a href="/">Home</a>
-        </li>
 {% endblock sidenav %}
 
 {% block content%}
-<h1 align="center">User Register Page</h1>
+<h2>User Registration</h1>
 
-<form action="" enctype="multipart/form-data" method="post" novalidate>
-    <table>
-        {{form.as_table }}
-        <tr>
-            <td>
-                <input type="submit" value="Submit">
-            </td>
-        </tr>
-    </table>
-    {% csrf_token %}
-</form>
+<div class="container p-2 text-start">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="" enctype="multipart/form-data" method="post" novalidate>
+                <div class="form-group p-1">
+                    <label for="id_username" class="form-label">Username</label>
+                    {% render_field form.username class+='form-control' %}
+                    <div class="form-text">
+                        150 characters or fewer. Letters, digits and @/./+/-/_ only.
+                    </div>
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_password1" class="form-label">Password</label>
+                    {% render_field form.password1 class+='form-control' %}
+                    <div class="form-text">
+                        <ul>
+                            <li>Your password can’t be too similar to your other personal information.</li>
+                            <li>Your password must contain at least 8 characters.</li>
+                            <li>Your password can’t be a commonly used password.</li>
+                            <li>Your password can’t be entirely numeric.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_password2" class="form-label">Repeat Password</label>
+                    {% render_field form.password2 class+='form-control' %}
+                    <div class="form-text">
+                        Enter the same password as before, for verification.
+                    </div>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}"/>
+                {% csrf_token %}
+                <div class="text-center">
+                    <input class="btn btn-outline-primary p-1" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

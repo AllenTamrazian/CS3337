@@ -1,4 +1,5 @@
 import datetime
+import difflib
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -154,22 +155,22 @@ def sendmessage(request):
 
 
 def search(request):
-    # if request.method == 'POST':
     query = request.POST.get('q')
     books = []
 
     if query:
-        books = Book.objects.filter(name__icontains=query)
-    # for b in books:
-    #     b.pic_path = b.picture.url[14:]
-        # else:
-        #     books = Book.objects.none()
+        all_books = Book.objects.all()
+        matches = difflib.get_close_matches(query.lower(), [q.name.lower() for q in all_books], cutoff=0.3)
+        books = [q for q in all_books if q.name.lower() in matches]
+        for b in books:
+            b.pic_path = b.picture.url[14:]
 
     return render(request,
                   'bookMng/search.html',
                   {
                       'item_list': MainMenu.objects.all(),
-                      'books': books
+                      'books': books,
+                      'query': query
                    })
 
 @login_required(login_url=reverse_lazy('login'))

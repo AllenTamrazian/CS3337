@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block sidenav %}
         <li class="nav-item">
@@ -8,21 +9,30 @@
 {% endblock sidenav %}
 
 {% block content%}
-<h1 align="center">User Login Page</h1>
+<h2>User Login</h2>
 
-<form action="{% url 'login' %}" method="post" >
-    <table>
-        {{form.as_table }}
-        <tr>
-            <td>
-                <input type="submit" value="login">
-            </td>
-        </tr>
-    </table>
-    <p>
-        To register: <a href="{% url 'register' %}"> Click Here</a>
-    </p>
-    <input type="hidden" name="next" value="{{ next }}"/>
-    {% csrf_token %}
-</form>
+<div class="container p-2 text-start">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="{% url 'login' %}" method="post" >
+                <div class="form-group p-1">
+                    <label for="id_username" class="form-label">Username</label>
+                    {% render_field form.username class+='form-control' %}
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_password" class="form-label">Password</label>
+                    {% render_field form.password class+='form-control' %}
+                </div>
+                <div class="form-group p-1">
+                    To register: <a href="{% url 'register' %}"> Click Here</a>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}"/>
+                {% csrf_token %}
+                <div class="text-center">
+                    <input class="btn btn-outline-primary p-1" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -3,7 +3,7 @@ FROM python:alpine
 EXPOSE 8000
 WORKDIR /app
 
-RUN pip3 install Django
+RUN pip3 install Django django-widget-tweaks
 
 COPY . /app
 ENTRYPOINT ["python3"]

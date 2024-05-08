@@ -33,6 +33,7 @@ CSRF_TRUSTED_ORIGINS = [ 'https://*.orb.local' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'widget_tweaks',
     'bookMng.apps.BookmngConfig',   #added
     "django.contrib.admin",
     "django.contrib.auth",

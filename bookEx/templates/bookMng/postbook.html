@@ -1,23 +1,38 @@
 {% extends "base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
-<div class="content">
-    <h1>This is Post Book Page</h1>
-    {% if submitted %}
-       <p>Post Book Successfully!</p>
-    {% else %}
-    <form action="" enctype="multipart/form-data" method="post" novalidate>
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td colspan="2">
-                    <input type="submit" value="Submit" class="btn">
-                </td>
-            </tr>
-        </table>
-        {% csrf_token %}
-    </form>
-    {% endif %}
+<h2>This is Post Book Page</h2>
+{% if submitted %}
+Book posted successfully!
+{% else %}
+<div class="container p-2 text-start">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form action="" enctype="multipart/form-data" method="post" novalidate>
+                <div class="form-group p-1">
+                    <label for="id_name" class="form-label">Name</label>
+                    {% render_field form.name class+='form-control' %}
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_web" class="form-label">Web</label>
+                    {% render_field form.web class+='form-control' %}
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_price" class="form-label">Price</label>
+                    {% render_field form.price class+='form-control' %}
+                </div>
+                <div class="form-group p-1">
+                    <label for="id_picture" class="form-label">Picture</label>
+                    {% render_field form.picture class+='form-control' %}
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-outline-primary p-1" type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+{% endif %}
 {% endblock content %}

@@ -25,6 +25,7 @@
     .left-column {
         flex: 1;
         margin-right: 20px;
+        padding-left: $padding-29;
     }
     .right-column {
         flex: 2;
@@ -43,23 +44,22 @@
     th {
         background-color: #f2f2f2;
     }
-        .paragraph-border {
-        border: 1px solid #dddddd;
-        padding: 10px;
+
+    .welcome-section {
+        background-color: lightblue;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 3px solid #000000;
     }
-        .welcome-section {
-            background-color: lightblue;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 3px solid #000000;
-        }
 </style>
 
-<div class="container">
-    <div class="left-column">
+
+<div class="container overflow-hidden">
+  <div class="row gy-11">
+    <div class="col-2.5">
         <table>
             <tr>
                 <th>Group Members</th>
@@ -82,18 +82,33 @@
             <tr><td>Rizza Barnwell</td></tr>
         </table>
     </div>
-    <div class="right-column">
-        <p class="paragraph-border">
-            We created a Book Exchange System that gives book lovers and book readers
-            a place to post a book with a comment and/or a rating. The user is also
-            able to send and receive messages via the Inbox Tab. Give the Book System a
-            try and review your favorite books!
-        </p>
-        <p class="paragraph-border">We are a group of Computer Science Undergraduate students utilizing our
-        software engineering technical skills to create this system. We used our knowledge of Django, Bootstrap,
+    <div class="col">
+        <p class="lead">
+            We are a group of Computer Science Undergraduate students utilizing our
+            software engineering technical skills to create this system. We used our knowledge of Django, Bootstrap,
             Databases, and Python to create a functional system for book users.
+            We're passionate about the power of storytelling and
+            the joy of sharing books. We believe that every book deserves to be read
+            and cherished, and that's why we've created a platform where book lovers
+            from around the world can come together to exchange, discover, and connect.<br>
+
+            Our mission is simple: to make it easy and fun for people to find new homes
+            for their beloved books and discover hidden literary treasures. Whether you're
+            looking to declutter your bookshelf, find your next favorite read, or simply
+            connect with fellow book enthusiasts. Here, you can actively engage with the community by
+            commenting on and rating books. Additionally, our messaging feature enables seamless communication,
+            allowing you to connect with other members directly through the inbox.
         </p>
+        <blockquote class="blockquote text-right">
+           <em>"There is no Frigate like a Book To take us Lands away."</em>
+            <footer class="blockquote-footer"> <cite title="Emily Dickinson">Emily Dickinson</cite></footer>
+        </blockquote>
     </div>
+  </div>
 </div>
+
+
+
+
 
 {% endblock content %}

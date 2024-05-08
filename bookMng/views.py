@@ -1,4 +1,5 @@
 import datetime
+import difflib
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -158,7 +159,11 @@ def search(request):
     books = []
 
     if query:
-        books = Book.objects.filter(name__icontains=query)
+        all_books = Book.objects.all()
+        matches = difflib.get_close_matches(query.lower(), [q.name.lower() for q in all_books], cutoff=0.3)
+        books = [q for q in all_books if q.name.lower() in matches]
+        for b in books:
+            b.pic_path = b.picture.url[14:]
 
     return render(request,
                   'bookMng/search.html',

@@ -2,44 +2,41 @@
 {% load static %}
 
 {% block content %}
-<div class="content">
-    <h1>Book Detail</h1>
-
-    <div class="book-detail">
-        <img src="{% static book.pic_path %}" alt="{{ book.name }}" class="book-image">
-    </div>
-
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>User</th>
-            <th>Publish Date</th>
-            <th>Rating</th>
-        </tr>
-        <tr>
-            <td>{{ book.name }}</td>
-            <td>{{ book.price }}</td>
-            <td>{{ book.username }}</td>
-            <td>{{ book.publishdate }}</td>
-            <td>{{ book.ratings_average }}</td>
-        </tr>
-    </table>
-
-    {% if not book.comments.all %}
-    <p>No Comments Added Yet</p>
-    {% else %}
-    <div class="comments">
-        {% for comment in book.comments.all %}
-        <div class="comment">
-            <h4><strong>{{comment.user}}</strong></h4>
-            <p>{{comment.commenter_body}}</p>
-            <small>{{comment.rating_value}} on {{comment.date_added}}</small>
+<h2>{{ book.name }}</h2>
+<div class="container p-2">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <img class="img-fluid" src="{% static book.pic_path %}" alt="{{ book.name }}" class="book-image">
+                    </div>
+                    <div class="col-sm fs-4">
+                        <strong class="fs-2">{{ book.price }}$</strong><br />
+                        <small class="text-muted">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from {{ book.username }}</small><br />
+                        Published {{ book.publishdate }}<br />
+                        Rated {{ book.ratings_average }}
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endfor %}
     </div>
-    {% endif %}
-
-    <a class="btn" href="{% url 'add-comment' book.id %}">Add Comment or Rating</a>
 </div>
+{% if not book.comments.all %}
+<p>No Comments Added Yet</p>
+{% else %}
+<div class="container p-2">
+    {% for comment in book.comments.all %}
+    <div class="d-inline-block border border-rounded text-left p-1 m-2">
+        <strong class="fs-4">{{comment.user}}&nbsp;</strong><small class="text-muted fs-6">{{comment.rating_value}} on {{comment.date_added}}</small><br />
+        <p class="fs-5">{{comment.commenter_body}}</p>
+    </div>
+    <br />
+    {% endfor %}
+    
+    <div>
+        <a class="btn btn-outline-primary" href="{% url 'add-comment' book.id %}">Add Comment/Rating</a>
+    </div>
+</div>
+{% endif %}
 {% endblock content %}

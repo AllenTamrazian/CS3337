@@ -50,15 +50,13 @@
             </div>
         </nav>
     </header>
-    <main>
-        <div class="container-fluid justify-content-center p-3">
-            {% block content %}
-            <h1>This is our Book Exchange System</h1>
-            {% endblock content %}
-        </div>
-        <img id="separator-image" src="{% static 'Library.png' %}" alt="Library">
+    <main class="container-fluid p-3 text-center">
+        {% block content %}
+        <h1>This is our Book Exchange System</h1>
+        {% endblock content %}
+        <img class="img-fluid" src="{% static 'Library.png' %}" alt="Library">
     </main>
-    <footer>
+    <footer class="text-center">
         2024 Spring CS3337 Section 1 Project
     </footer>
 </body>
